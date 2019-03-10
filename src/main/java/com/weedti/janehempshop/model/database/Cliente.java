@@ -1,4 +1,4 @@
-package com.weedti.janehempshop.model;
+package com.weedti.janehempshop.model.database;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.weedti.janehempshop.model;
+package com.weedti.janehempshop.model.database;
 
 import java.io.Serializable;
 
@@ -7,6 +7,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.weedti.janehempshop.enums.TamanhoProduto;
+import com.weedti.janehempshop.model.abstracts.AbstractProduto;
 
 @Entity
 @Table(name = "Seda")

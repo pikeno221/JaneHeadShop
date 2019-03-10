@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.weedti.janehempshop.model.Cliente;
+import com.weedti.janehempshop.model.database.Cliente;
 import com.weedti.janehempshop.model.response.ServiceResponse;
 import com.weedti.janehempshop.service.ClienteService;
 

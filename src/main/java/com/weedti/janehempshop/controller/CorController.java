@@ -17,27 +17,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.weedti.janehempshop.model.database.Seda;
+import com.weedti.janehempshop.model.database.Cor;
 import com.weedti.janehempshop.model.response.ServiceResponse;
-import com.weedti.janehempshop.service.SedaService;
+import com.weedti.janehempshop.service.CorService;
 
 @RestController
-@RequestMapping(value = "/sedas")
-public class SedaController {
+@RequestMapping("/cores")
+public class CorController {
 
 	@Autowired
-	private SedaService service;
+	private CorService service;
 
 	@GetMapping()
-	public ResponseEntity<List<Seda>> buscaTodas() {
-
+	public ResponseEntity<List<Cor>> buscaTodas() {
 		return ResponseEntity.ok(service.buscaTodas());
+
 	}
 
 	@PostMapping()
-	public ResponseEntity<Void> cadastraSeda(@Valid @RequestBody Seda seda) {
+	public ResponseEntity<Void> cadastraCor(@Valid @RequestBody Cor cor) {
 
-		ServiceResponse responseService = service.cadastraSeda(seda);
+		ServiceResponse responseService = service.cadastraCor(cor);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(responseService.getId())
 				.toUri();
@@ -45,18 +45,20 @@ public class SedaController {
 		return ResponseEntity.created(uri).build();
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<Void> atualizaSeda(@PathVariable Integer idSeda, @Valid @RequestBody Seda seda) {
-		service.atualizaSeda(seda, idSeda);
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<Void> atualizaCor(@PathVariable Integer idCor, @Valid @RequestBody Cor cor) {
+		service.atualizaCor(cor, idCor);
 
 		return ResponseEntity.noContent().build();
+
 	}
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deletaSeda(@PathVariable Integer idSeda) {
-		service.deletaSeda(idSeda);
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> deletaCor(@PathVariable Integer idCor) {
+		service.deletaCor(idCor);
 
 		return ResponseEntity.noContent().build();
+
 	}
 
 }
