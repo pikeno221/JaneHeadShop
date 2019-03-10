@@ -7,6 +7,5 @@ import com.weedti.janehempshop.model.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
-	
-
+    
 }

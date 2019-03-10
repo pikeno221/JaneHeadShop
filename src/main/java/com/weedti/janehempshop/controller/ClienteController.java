@@ -44,7 +44,7 @@ public class ClienteController {
 	public ResponseEntity<Void> cadastraCliente(@Valid @RequestBody Cliente cliente) {
 		ClienteServiceResponse clienteResponse = service.cadastraCliente(cliente);
 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/id").buildAndExpand(clienteResponse.getId())
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(clienteResponse.getId())
 				.toUri();
 		return ResponseEntity.created(uri).build();
 
