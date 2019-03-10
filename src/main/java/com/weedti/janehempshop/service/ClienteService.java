@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.weedti.janehempshop.model.Cliente;
 import com.weedti.janehempshop.model.exception.ObjectNotFoundException;
 import com.weedti.janehempshop.model.exception.ServerSideException;
-import com.weedti.janehempshop.model.response.ClienteServiceResponse;
+import com.weedti.janehempshop.model.response.ServiceResponse;
 import com.weedti.janehempshop.repository.ClienteRepository;
 
 @Service
@@ -23,12 +23,12 @@ public class ClienteService {
 		return repository.findAll();
 	}
 
-	public ClienteServiceResponse cadastraCliente(Cliente cliente) {
+	public ServiceResponse cadastraCliente(Cliente cliente) {
 
 		try {
 
 			repository.save(cliente);
-			return new ClienteServiceResponse(cliente.getId(), "sucesso ao gravar cliente");
+			return new ServiceResponse(cliente.getId(), "sucesso ao gravar cliente");
 
 		} catch (Exception e) {
 			throw new ServerSideException("Erro ao realizar a inserção do cliente! ");
@@ -42,16 +42,16 @@ public class ClienteService {
 
 	}
 
-	public void atualizaCliente(Cliente cliente, Integer id) {
+	public void atualizaCliente(Cliente cliente, Integer idCliente) {
 
-		repository.save(setaValoresClienteAtualizacao(cliente, buscaCliente(id)));
+		repository.save(setaValoresClienteAtualizacao(cliente, buscaCliente(idCliente)));
 	}
 
-	public Cliente buscaCliente(Integer id) {
+	public Cliente buscaCliente(Integer idCliente) {
 
-		Optional<Cliente> cliente = repository.findById(id);
+		Optional<Cliente> cliente = repository.findById(idCliente);
 
-		return cliente.orElseThrow(() -> new ObjectNotFoundException("cliente não encontrado. Id: " + id));
+		return cliente.orElseThrow(() -> new ObjectNotFoundException("cliente não encontrado. Id: " + idCliente));
 
 	}
 

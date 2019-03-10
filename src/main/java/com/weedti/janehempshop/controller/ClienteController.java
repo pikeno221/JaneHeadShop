@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.weedti.janehempshop.model.Cliente;
-import com.weedti.janehempshop.model.response.ClienteServiceResponse;
+import com.weedti.janehempshop.model.response.ServiceResponse;
 import com.weedti.janehempshop.service.ClienteService;
 
 @RestController
@@ -42,7 +42,7 @@ public class ClienteController {
 
 	@PostMapping
 	public ResponseEntity<Void> cadastraCliente(@Valid @RequestBody Cliente cliente) {
-		ClienteServiceResponse clienteResponse = service.cadastraCliente(cliente);
+		ServiceResponse clienteResponse = service.cadastraCliente(cliente);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(clienteResponse.getId())
 				.toUri();

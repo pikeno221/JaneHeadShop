@@ -5,7 +5,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 @Data
-public class ClienteServiceResponse implements Serializable{
+public class ServiceResponse implements Serializable{
 
 	/**
 	 * 
@@ -14,7 +14,7 @@ public class ClienteServiceResponse implements Serializable{
 	
 	private Integer id;
 	private String mensagem;
-	public ClienteServiceResponse(Integer id, String mensagem) {
+	public ServiceResponse(Integer id, String mensagem) {
 		super();
 		this.id = id;
 		this.mensagem = mensagem;
