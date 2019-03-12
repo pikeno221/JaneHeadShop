@@ -1,10 +1,10 @@
-package com.weedti.janehempshop.model.database;
+package com.weedti.janehempshop.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,18 +30,16 @@ public class Cliente implements Serializable {
 	private Integer id;
 	
 
+	@Column(length = 100)
 	@NotNull(message = "nome obrigatorio")
-	@Basic(optional = false)
 	private String nome;
 	
-
+	@Column(length = 100)
 	@NotNull(message = "email e obrigatorio")
-	@Basic(optional = false)
 	private String email;
 	
-
+	@Column(length = 25)
 	@NotNull(message = "telefone e obrigatorio")
-	@Basic(optional = false)
 	private String telefone;
 	
 	@OneToMany(mappedBy="cliente")

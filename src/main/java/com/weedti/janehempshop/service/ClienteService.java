@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.weedti.janehempshop.model.database.Cliente;
+import com.weedti.janehempshop.model.Cliente;
 import com.weedti.janehempshop.model.exception.ObjectNotFoundException;
 import com.weedti.janehempshop.model.exception.ServerSideException;
 import com.weedti.janehempshop.model.response.ServiceResponse;
@@ -18,7 +18,7 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository repository;
 
-	public List<Cliente> buscarTodos() {
+	public List<Cliente> buscaTodos() {
 
 		return repository.findAll();
 	}
@@ -42,8 +42,7 @@ public class ClienteService {
 
 	}
 
-	public void atualizaCliente(Cliente cliente, Integer idCliente) {
-
+	public void atualizaCliente(Integer idCliente, Cliente cliente) {
 		repository.save(setaValoresClienteAtualizacao(cliente, buscaCliente(idCliente)));
 	}
 

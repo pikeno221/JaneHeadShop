@@ -1,5 +1,6 @@
 package com.weedti.janehempshop.controller;
 
+/*
 import java.net.URI;
 import java.util.List;
 
@@ -17,55 +18,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.weedti.janehempshop.model.Cliente;
+import com.weedti.janehempshop.model.Categoria;
 import com.weedti.janehempshop.model.response.ServiceResponse;
-import com.weedti.janehempshop.service.ClienteService;
 
 @RestController
-@RequestMapping(value = "/clientes")
-public class ClienteController {
+@RequestMapping("/categorias")
+public class CategoriaController {
 
 	@Autowired
-	private ClienteService service;
+	private CategoriaService service;
 
-	@GetMapping
-	public ResponseEntity<List<Cliente>> buscaClientes() {
-		return ResponseEntity.ok(service.buscaTodos());
+	@GetMapping()
+	public ResponseEntity<List<Categoria>> buscaCategorias() {
+		return ResponseEntity.ok(service.buscaTodas());
 
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Cliente> buscaCliente(@PathVariable Integer id) {
-		return ResponseEntity.ok(service.buscaCliente(id));
+	public ResponseEntity<Categoria> buscaCategoria(@PathVariable Integer id) {
+		return ResponseEntity.ok(service.buscaCategoria(id));
 
 	}
 
-	@PostMapping
-	public ResponseEntity<Void> cadastraCliente(@Valid @RequestBody Cliente cliente) {
-		ServiceResponse responseService = service.cadastraCliente(cliente);
+	@PostMapping()
+	public ResponseEntity<Void> cadastraCategoria(@Valid @RequestBody Categoria categoria) {
+		ServiceResponse responseService = service.cadastraCategoria(categoria);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(responseService.getId())
 				.toUri();
+
 		return ResponseEntity.created(uri).build();
 
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> atualizaCliente(@PathVariable Integer id, @Valid @RequestBody Cliente cliente) {
-		service.atualizaCliente(id, cliente);
-
+	public ResponseEntity<Void> atualizaCategoria(@PathVariable Integer id, @RequestBody Categoria categoria) {
+		service.atualizaCategoria(id, categoria);
+		
 		return ResponseEntity.noContent().build();
-
+		
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deletaCliente(@PathVariable Integer id) {
-		service.deletaCliente(id);
+	public ResponseEntity<Void> deletaCategoria(@PathVariable Integer id) {
+		service.deletaCategoria(id);
 		
 		return ResponseEntity.noContent().build();
 		
-		
 	}
 	
-
 }
+*/

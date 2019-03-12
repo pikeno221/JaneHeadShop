@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.weedti.janehempshop.model.database.Cor;
+import com.weedti.janehempshop.model.Cor;
 import com.weedti.janehempshop.model.response.ServiceResponse;
 import com.weedti.janehempshop.service.CorService;
 
@@ -47,7 +47,7 @@ public class CorController {
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Void> atualizaCor(@PathVariable Integer idCor, @Valid @RequestBody Cor cor) {
-		service.atualizaCor(cor, idCor);
+		service.atualizaCor(idCor, cor);
 
 		return ResponseEntity.noContent().build();
 

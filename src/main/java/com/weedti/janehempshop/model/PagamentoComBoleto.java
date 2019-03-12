@@ -1,4 +1,4 @@
-package com.weedti.janehempshop.model.database;
+package com.weedti.janehempshop.model;
 
 import java.util.Date;
 
@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.weedti.janehempshop.model.Pagamento;
 
 @Entity
 @JsonTypeName("pagamentoComBoleto")

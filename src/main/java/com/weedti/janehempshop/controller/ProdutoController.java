@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.weedti.janehempshop.model.database.Produto;
+import com.weedti.janehempshop.model.Produto;
 import com.weedti.janehempshop.model.response.ServiceResponse;
 import com.weedti.janehempshop.service.ProdutoService;
 
@@ -52,7 +52,7 @@ public class ProdutoController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> atualizaProduto(@PathVariable Integer idProduto, @Valid @RequestBody Produto produto) {
-		service.atualizaProduto(produto, idProduto);
+		service.atualizaProduto(idProduto, produto);
 
 		return ResponseEntity.noContent().build();
 	}

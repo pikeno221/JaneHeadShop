@@ -1,4 +1,4 @@
-package com.weedti.janehempshop.model.database;
+package com.weedti.janehempshop.model;
 
 import java.io.Serializable;
 
@@ -26,8 +26,10 @@ public class ItemPedido implements Serializable {
 	@NotNull(message = "quantidade e obrigatorio")
 	private Integer quantidade;
 
-	@NotNull(message = "")
+	@NotNull(message = "preco e obrigatorio")
 	private Double preco;
+	
+	
 	
 	
 

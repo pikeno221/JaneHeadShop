@@ -1,4 +1,4 @@
-package com.weedti.janehempshop.model.database;
+package com.weedti.janehempshop.model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -19,7 +19,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.weedti.janehempshop.model.Pagamento;
 
 import lombok.Data;
 
@@ -49,21 +48,18 @@ public class Pedido implements Serializable {
 
 	@NotNull(message = "cliente e obrigatorio")
 	@ManyToOne
-	@JoinColumn(name="client_id")
+	@JoinColumn(name = "client_id")
 	private Cliente cliente;
 
 	@OneToMany(mappedBy = "id.pedido")
 	private Set<ItemPedido> produtos = new HashSet<>();
 
-	
-	
-	public Double getTotal() {
-		double total = 0;
-		
-		for (ItemPedido x : this.produtos) {
-			total += this.produtos.getValor();
-		}
-		
-		return total;
-	}
+	/*
+	 * public Double getTotal() { double total = 0;
+	 * 
+	 * for (ItemPedido x : this.produtos) { total += this.produtos.getSubTotal(); }
+	 * 
+	 * return total; }
+	 * 
+	 */
 }

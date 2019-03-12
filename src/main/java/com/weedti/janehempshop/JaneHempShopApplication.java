@@ -5,7 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.weedti.janehempshop.model.database.Cliente;
+import com.weedti.janehempshop.model.Cliente;
 import com.weedti.janehempshop.repository.ClienteRepository;
 
 @SpringBootApplication

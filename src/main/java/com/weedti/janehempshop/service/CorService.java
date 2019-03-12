@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.weedti.janehempshop.model.database.Cor;
+import com.weedti.janehempshop.model.Cor;
 import com.weedti.janehempshop.model.exception.ObjectNotFoundException;
 import com.weedti.janehempshop.model.exception.ServerSideException;
 import com.weedti.janehempshop.model.response.ServiceResponse;
@@ -40,7 +40,7 @@ public class CorService {
 		repository.delete(buscaCor(idCor));
 	}
 
-	public void atualizaCor(Cor cor, Integer idCor) {
+	public void atualizaCor(Integer idCor, Cor cor) {
 		repository.save(setaValoresAtualizacaoCor(cor, buscaCor(idCor)));
 
 	}

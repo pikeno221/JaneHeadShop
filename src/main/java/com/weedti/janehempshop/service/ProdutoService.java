@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.weedti.janehempshop.model.database.Categoria;
-import com.weedti.janehempshop.model.database.Produto;
+import com.weedti.janehempshop.model.Categoria;
+import com.weedti.janehempshop.model.Produto;
 import com.weedti.janehempshop.model.exception.ObjectNotFoundException;
 import com.weedti.janehempshop.model.exception.ServerSideException;
 import com.weedti.janehempshop.model.response.ServiceResponse;
@@ -45,7 +45,7 @@ public class ProdutoService {
 		repository.delete(buscaProduto(idProduto));
 	}
 
-	public void atualizaProduto(Produto produto, Integer idProduto) {
+	public void atualizaProduto(Integer idProduto, Produto produto) {
 
 		repository.save(setaValoresProdutoAtualizacao(produto, buscaProduto(idProduto)));
 

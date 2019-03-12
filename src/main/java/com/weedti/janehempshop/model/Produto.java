@@ -1,8 +1,7 @@
-package com.weedti.janehempshop.model.database;
+package com.weedti.janehempshop.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +14,8 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "cores")
-public class Cor implements Serializable {
+@Table(name = "produtos")
+public class Produto implements Serializable {
 
 	/**
 	 * 
@@ -26,10 +25,21 @@ public class Cor implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
-	@Column(length = 255)
-	@NotNull(message = "descricao e obrigatorio")
-	@Basic(optional = false)
+	
+	@NotNull(message = "nome e obrigatorio")
+	@Column(length = 200)
+	private String nome;
+	
+	private Cor cor;
+	
+	@NotNull(message = "categoria e obrigatoria")
+	private Categoria categoria;
+	
+	@NotNull(message = "descricao e obrigatoria")
 	private String descricao;
+	
+	private Double valor;
+	
+	private Integer qtdEstoque;
 
 }
