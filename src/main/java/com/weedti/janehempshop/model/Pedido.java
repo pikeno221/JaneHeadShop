@@ -52,7 +52,7 @@ public class Pedido implements Serializable {
 	private Cliente cliente;
 
 	@OneToMany(mappedBy = "id.pedido")
-	private Set<ItemPedido> produtos = new HashSet<>();
+	private Set<ItemPedido> itens = new HashSet<>();
 
 	/*
 	 * public Double getTotal() { double total = 0;
