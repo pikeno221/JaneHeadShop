@@ -50,7 +50,7 @@ public class Pedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Cliente cliente;
-
+	
 	@OneToMany(mappedBy = "id.pedido")
 	private Set<ItemPedido> itens = new HashSet<>();
 

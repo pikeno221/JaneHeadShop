@@ -51,7 +51,7 @@ public class ClienteController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> atualizaCliente(@PathVariable Integer id, @Valid @RequestBody Cliente cliente) {
+	public ResponseEntity<Void> atualizaCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
 		service.atualizaCliente(id, cliente);
 
 		return ResponseEntity.noContent().build();
