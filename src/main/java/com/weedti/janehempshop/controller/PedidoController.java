@@ -47,7 +47,7 @@ public class PedidoController {
 	
 	@PostMapping()
 	public ResponseEntity<Void> inserePedido(@Valid @RequestBody Pedido pedido) {
-		pedido = service.cadastraPedido(pedido);
+		pedido = service.salvaPedido(pedido);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pedido.getId())
 				.toUri();
