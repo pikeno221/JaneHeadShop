@@ -24,8 +24,8 @@ public class ClienteService {
 
 	}
 
-	public void cadastraCliente(Cliente cliente) {
-		Optional.of(repository.save(cliente))
+	public Cliente cadastraCliente(Cliente cliente) {
+		return Optional.of(repository.save(cliente))
 				.orElseThrow(() -> new ServerSideException("Erro ao gravar cliente no banco"));
 
 	}
