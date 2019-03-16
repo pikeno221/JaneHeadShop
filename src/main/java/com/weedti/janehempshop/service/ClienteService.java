@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.weedti.janehempshop.model.Cliente;
 import com.weedti.janehempshop.model.exception.ObjectNotFoundException;
 import com.weedti.janehempshop.model.exception.ServerSideException;
-import com.weedti.janehempshop.model.response.ServiceResponse;
 import com.weedti.janehempshop.repository.ClienteRepository;
 
 @Service
@@ -20,52 +19,38 @@ public class ClienteService {
 
 	public List<Cliente> buscaTodos() {
 
-		return repository.findAll();
+		return Optional.of(repository.findAll())
+				.orElseThrow(() -> new ObjectNotFoundException("Nenhum Cliente encontrado"));
+
 	}
 
-	public ServiceResponse cadastraCliente(Cliente cliente) {
-
-		try {
-
-			repository.save(cliente);
-			return new ServiceResponse(cliente.getId(), "sucesso ao gravar cliente");
-
-		} catch (Exception e) {
-			throw new ServerSideException("Erro ao realizar a inserção do cliente! ");
-
-		}
+	public void cadastraCliente(Cliente cliente) {
+		Optional.of(repository.save(cliente))
+				.orElseThrow(() -> new ServerSideException("Erro ao gravar cliente no banco"));
 
 	}
 
 	public void deletaCliente(Integer id) {
-		repository.delete(buscaCliente(id));
+		try {
+			repository.delete(buscaCliente(id));
 
+		} catch (NullPointerException e) {
+			throw new ServerSideException("Erro crtico");
+
+		}
 	}
 
 	public void atualizaCliente(Integer idCliente, Cliente cliente) {
-		repository.save(setaValoresClienteAtualizacao(cliente, buscaCliente(idCliente)));
+
+		Optional.of(repository.save(buscaCliente(idCliente)))
+				.orElseThrow(() -> new ServerSideException("Erro ao atualizar Cliente"));
+
 	}
 
 	public Cliente buscaCliente(Integer idCliente) {
 
-		Optional<Cliente> cliente = repository.findById(idCliente);
-
-		return cliente.orElseThrow(() -> new ObjectNotFoundException("cliente não encontrado. Id: " + idCliente));
-
-	}
-
-	private Cliente setaValoresClienteAtualizacao(Cliente cliente, Cliente clienteBanco) {
-
-		if (cliente.getNome() != null && !cliente.getNome().isEmpty())
-			clienteBanco.setNome(cliente.getNome());
-
-		if (cliente.getEmail() != null && !cliente.getEmail().isEmpty())
-			clienteBanco.setEmail(cliente.getEmail());
-
-		if (cliente.getTelefone() != null && !cliente.getTelefone().isEmpty())
-			clienteBanco.setTelefone(cliente.getTelefone());
-
-		return clienteBanco;
+		return Optional.of(repository.findById(idCliente))
+				.orElseThrow(() -> new ServerSideException("Erro ao buscar cliente no banco")).get();
 
 	}
 

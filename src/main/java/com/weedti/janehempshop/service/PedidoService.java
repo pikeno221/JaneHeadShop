@@ -40,7 +40,7 @@ public class PedidoService {
 
 	}
 
-	public Pedido cadastraPedido(@Valid Pedido pedido) {
+	public Pedido salvaPedido(@Valid Pedido pedido) {
 
 		return Optional.of(repository.save(pedido))
 				.orElseThrow(() -> new ServerSideException("Erro ao gravar cliente"));
@@ -54,15 +54,14 @@ public class PedidoService {
 	}
 
 	public void deletaPedido(Integer id) {
+
 		try {
 			repository.delete((Pedido) buscaPedido(id));
 
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 			throw new ServerSideException(" Erro Critico. ");
 
 		}
 
 	}
-	// REFATORAR O SERVICE URGENTE #ATUALIZACAO
-
 }

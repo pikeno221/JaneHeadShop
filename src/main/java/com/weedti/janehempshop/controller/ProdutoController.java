@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.weedti.janehempshop.model.Produto;
-import com.weedti.janehempshop.model.response.ServiceResponse;
 import com.weedti.janehempshop.service.ProdutoService;
 
 @RestController
@@ -42,9 +41,9 @@ public class ProdutoController {
 	@PostMapping()
 	public ResponseEntity<Void> cadastraProduto(@Valid @RequestBody Produto produto) {
 
-		ServiceResponse responseService = service.cadastraProduto(produto);
+		produto = service.cadastraProduto(produto);
 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(responseService.getId())
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(produto.getId())
 				.toUri();
 
 		return ResponseEntity.created(uri).build();
@@ -67,7 +66,7 @@ public class ProdutoController {
 	@GetMapping("/categoria/{idCategoria}")
 	public ResponseEntity<List<Produto>> buscarProdutoPorCategoria(@PathVariable Integer idCategoria) {
 		return ResponseEntity.ok(service.buscaProdutosPorCategoria(idCategoria));
-		
+
 	}
 
 }
