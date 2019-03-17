@@ -47,10 +47,8 @@ public class ProdutoService {
 	}
 
 	public void atualizaProduto(Integer idProduto, Produto produto) {
-		buscaProduto(idProduto);
-		
-		// SALVA O OBJ COM OS OUTROS CAMPOS NULOS OU ELES MANTEM?
-		Optional.of(repository.save(produto))
+		;
+		Optional.of(repository.save(setaValoresAtualizacaoProduto(produto, buscaProduto(idProduto))))
 				.orElseThrow(() -> new ServerSideException("Erro ao atualizar produto "));
 
 	}
@@ -67,6 +65,29 @@ public class ProdutoService {
 
 		return repository.findByCategoria(categoria)
 				.orElseThrow(() -> new ObjectNotFoundException("Nenhum produto encontrado com esta categoria."));
+	}
+
+	private Produto setaValoresAtualizacaoProduto(Produto produto, Produto produtoBanco) {
+
+		if (produto.getNome() != null && !produto.getNome().isEmpty())
+			produtoBanco.setNome(produto.getNome());
+
+		if (produto.getCor() != null)
+			produtoBanco.setCor(produto.getCor());
+
+		if (produto.getCategoria() != null)
+			produtoBanco.setCategoria(produto.getCategoria());
+
+		if (produto.getDescricao() != null && !produto.getDescricao().isEmpty())
+			produtoBanco.setDescricao(produto.getDescricao());
+
+		if (produto.getValor() != null)
+			produtoBanco.setValor(produto.getValor());
+
+		if (produto.getQtdEstoque() != null)
+			produtoBanco.setQtdEstoque(produto.getQtdEstoque());
+
+		return produtoBanco;
 	}
 
 }

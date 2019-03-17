@@ -51,6 +51,7 @@ public class Pedido implements Serializable {
 	@JoinColumn(name = "client_id")
 	private Cliente cliente;
 	
+	@NotNull(message = "itens do pedido e obrigatorio")
 	@OneToMany(mappedBy = "id.pedido")
 	private Set<ItemPedido> itens = new HashSet<>();
 

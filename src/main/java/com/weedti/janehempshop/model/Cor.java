@@ -30,4 +30,5 @@ public class Cor implements Serializable {
 	@NotNull(message = "descricao e obrigatorio")
 	private String descricao;
 
+
 }

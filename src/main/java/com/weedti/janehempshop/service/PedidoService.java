@@ -1,5 +1,6 @@
 package com.weedti.janehempshop.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,7 +51,7 @@ public class PedidoService {
 	public void atualizaPedido(Integer id, Pedido pedido) {
 		buscaPedido(id);
 
-		Optional.of(repository.save((pedido)))
+		Optional.of(repository.save(setaValoresAtualizacaoPedido(pedido, buscaPedido(id))))
 				.orElseThrow(() -> new ObjectNotFoundException("Pedido com o id " + id + " nao foi encontrado. "));
 
 	}
@@ -64,6 +65,21 @@ public class PedidoService {
 			throw new ServerSideException(" Erro Critico. ");
 
 		}
-
 	}
+	
+	private Pedido setaValoresAtualizacaoPedido(Pedido pedido, Pedido pedidoBanco) {
+
+		pedidoBanco.setDataAtualizacao(new Date());
+		
+		if (pedido.getPagamento() !=  null)
+			pedidoBanco.setPagamento(pedido.getPagamento());
+		
+		if (pedido.getCliente() != null) 
+			pedidoBanco.setCliente(pedido.getCliente());
+		
+		if (pedido.getItens() !=  null)
+			pedidoBanco.setItens(pedido.getItens());
+		
+		return pedidoBanco;
+		}
 }

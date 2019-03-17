@@ -50,8 +50,8 @@ public class CorService {
 
 	public Cor buscaCor(Integer idCor) {
 
-		return Optional.of(repository.findById(idCor))
-				.orElseThrow(() -> new ObjectNotFoundException("Nenhuma cor encontrada com o id " + idCor)).get();
+		return repository.findById(idCor)
+				.orElseThrow(() -> new ObjectNotFoundException("Nenhuma cor encontrada com o id " + idCor));
 	}
 
 	private Cor setaValoresAtualizacaoCor(Cor cor, Cor corBanco) {
