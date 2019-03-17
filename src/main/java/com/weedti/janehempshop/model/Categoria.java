@@ -12,30 +12,22 @@ import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
-
 @Data
 @Entity
 @Table(name = "categorias")
-public class Categoria  implements Serializable {
+public class Categoria implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(length = 100)
 	@NotNull(message = "descricao e obrigatorio")
 	private String descricao;
-	
-	private String campo1;
-	
-	private String campo2;
-	
-	
-	
 
 }

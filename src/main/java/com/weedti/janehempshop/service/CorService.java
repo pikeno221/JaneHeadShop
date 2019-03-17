@@ -42,9 +42,8 @@ public class CorService {
 	}
 
 	public void atualizaCor(Integer idCor, Cor cor) {
-		buscaCor(idCor);
 
-		Optional.of(repository.save(cor))
+		Optional.of(repository.save(setaValoresAtualizacaoCor(cor, buscaCor(idCor))))
 				.orElseThrow(() -> new ServerSideException("Erro ao atualizar cor com o id " + idCor));
 
 	}
@@ -53,7 +52,14 @@ public class CorService {
 
 		return Optional.of(repository.findById(idCor))
 				.orElseThrow(() -> new ObjectNotFoundException("Nenhuma cor encontrada com o id " + idCor)).get();
+	}
 
+	private Cor setaValoresAtualizacaoCor(Cor cor, Cor corBanco) {
+
+		if (cor.getDescricao() != null && !cor.getDescricao().isEmpty())
+			corBanco.setDescricao(cor.getDescricao());
+
+		return corBanco;
 	}
 
 }

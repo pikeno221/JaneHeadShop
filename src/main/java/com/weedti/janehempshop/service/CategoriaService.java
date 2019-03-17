@@ -36,10 +36,7 @@ public class CategoriaService {
 	}
 
 	public void atualizaCategoria(Integer id, Categoria categoria) {
-		buscaCategoria(id);
-		categoria.setId(id);
-		
-		Optional.of(repository.save(categoria))
+		Optional.of(repository.save(setaValoresAtualizacaoCategoria(categoria, buscaCategoria(id))))
 				.orElseThrow(() -> new ServerSideException("Erro ao atualizar categoria com o id " + id));
 
 	}
@@ -52,7 +49,14 @@ public class CategoriaService {
 		} catch (Exception e) {
 			throw new ServerSideException("erro ao deletar categoria com o id " + id);
 		}
+	}
+	
+	private Categoria setaValoresAtualizacaoCategoria(Categoria categoria, Categoria corBanco) {
 
+		if (categoria.getDescricao() != null && !categoria.getDescricao().isEmpty())
+			corBanco.setDescricao(categoria.getDescricao());
+
+		return corBanco;
 	}
 
 }

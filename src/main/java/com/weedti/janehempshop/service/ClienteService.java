@@ -42,8 +42,8 @@ public class ClienteService {
 
 	public void atualizaCliente(Integer idCliente, Cliente cliente) {
 		buscaCliente(idCliente);
-		
-		Optional.of(repository.save(cliente))
+
+		Optional.of(repository.save(setaValoresAtualizacaoCliente(cliente, buscaCliente(idCliente))))
 				.orElseThrow(() -> new ServerSideException("Erro ao atualizar Cliente"));
 
 	}
@@ -53,6 +53,20 @@ public class ClienteService {
 		return Optional.of(repository.findById(idCliente))
 				.orElseThrow(() -> new ServerSideException("Erro ao buscar cliente no banco")).get();
 
+	}
+
+	private Cliente setaValoresAtualizacaoCliente(Cliente cliente, Cliente clienteBanco) {
+
+		if (cliente.getNome() != null && !cliente.getNome().isEmpty())
+			clienteBanco.setNome(cliente.getNome());
+
+		if (cliente.getEmail() != null && !cliente.getEmail().isEmpty())
+			clienteBanco.setEmail(cliente.getEmail());
+
+		if (cliente.getTelefone() != null && !cliente.getTelefone().isEmpty())
+			clienteBanco.setTelefone(cliente.getTelefone());
+
+		return clienteBanco;
 	}
 
 }
