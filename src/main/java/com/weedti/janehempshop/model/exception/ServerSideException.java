@@ -13,5 +13,4 @@ public class ServerSideException extends RuntimeException {
 	}
 	
 	
-
 }

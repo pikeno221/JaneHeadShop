@@ -1,7 +1,6 @@
 package com.weedti.janehempshop.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.weedti.janehempshop.model.Categoria;
 import com.weedti.janehempshop.model.Produto;
 import com.weedti.janehempshop.model.exception.ObjectNotFoundException;
-import com.weedti.janehempshop.model.exception.ServerSideException;
 import com.weedti.janehempshop.repository.CategoriaRepository;
 import com.weedti.janehempshop.repository.ProdutoRepository;
 
@@ -23,38 +21,23 @@ public class ProdutoService {
 	private CategoriaRepository categoriaRepository;
 
 	public List<Produto> buscaTodos() {
-
-		return Optional.of(repository.findAll())
-				.orElseThrow(() -> new ObjectNotFoundException("Nenhum Produto Encontrado. "));
-
+		return repository.findAll();
 	}
 
 	public Produto cadastraProduto(Produto produto) {
-
-		return Optional.of(repository.save(produto))
-				.orElseThrow(() -> new ServerSideException("Erro ao gravar produto"));
-
+		return repository.save(produto);
 	}
 
 	public void deletaProduto(Integer idProduto) {
-
-		try {
-			repository.delete(buscaProduto(idProduto));
-
-		} catch (Exception e) {
-			throw new ServerSideException("Erro critico");
-		}
+		repository.delete(buscaProduto(idProduto));
 	}
 
 	public void atualizaProduto(Integer idProduto, Produto produto) {
-		;
-		Optional.of(repository.save(setaValoresAtualizacaoProduto(produto, buscaProduto(idProduto))))
-				.orElseThrow(() -> new ServerSideException("Erro ao atualizar produto "));
+		repository.save(setaValoresAtualizacaoProduto(produto, buscaProduto(idProduto)));
 
 	}
 
 	public Produto buscaProduto(Integer idProduto) {
-
 		return repository.findById(idProduto)
 				.orElseThrow(() -> new ObjectNotFoundException("Produto nao encontrada com o id: " + idProduto));
 	}

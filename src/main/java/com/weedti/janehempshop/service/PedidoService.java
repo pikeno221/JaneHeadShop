@@ -2,7 +2,6 @@ package com.weedti.janehempshop.service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.weedti.janehempshop.model.Pedido;
 import com.weedti.janehempshop.model.exception.ObjectNotFoundException;
-import com.weedti.janehempshop.model.exception.ServerSideException;
 import com.weedti.janehempshop.repository.PedidoRepository;
 
 @Service
@@ -24,62 +22,46 @@ public class PedidoService {
 	private ClienteService clienteService;
 
 	public List<Pedido> buscaTodos() {
-		return Optional.of(repository.findAll())
-				.orElseThrow(() -> new ObjectNotFoundException(" Nenhum Pedido Encontrado"));
-
+		return repository.findAll();
 	}
 
 	public Pedido buscaPedido(Integer id) {
-		return Optional.of(repository.findById(id))
-				.orElseThrow(() -> new ObjectNotFoundException("Nao existe pedido com o id " + id)).get();
+		return repository.findById(id)
+				.orElseThrow(() -> new ObjectNotFoundException("Nao existe pedido com o id " + id));
 
 	}
 
 	public List<Pedido> buscaPedidosPorIdCliente(Integer idCliente) {
-		return Optional.of(repository.findByCliente(clienteService.buscaCliente(idCliente))).orElseThrow(
+		return repository.findByCliente(clienteService.buscaCliente(idCliente)).orElseThrow(
 				() -> new ObjectNotFoundException("Nao existe pedido para este o cliente de id " + idCliente));
 
 	}
 
 	public Pedido salvaPedido(@Valid Pedido pedido) {
-
-		return Optional.of(repository.save(pedido))
-				.orElseThrow(() -> new ServerSideException("Erro ao gravar cliente"));
-
+		return repository.save(pedido);
 	}
 
 	public void atualizaPedido(Integer id, Pedido pedido) {
-		buscaPedido(id);
-
-		Optional.of(repository.save(setaValoresAtualizacaoPedido(pedido, buscaPedido(id))))
-				.orElseThrow(() -> new ObjectNotFoundException("Pedido com o id " + id + " nao foi encontrado. "));
-
+		repository.save(setaValoresAtualizacaoPedido(pedido, buscaPedido(id)));
 	}
 
 	public void deletaPedido(Integer id) {
-
-		try {
-			repository.delete((Pedido) buscaPedido(id));
-
-		} catch (Exception e) {
-			throw new ServerSideException(" Erro Critico. ");
-
-		}
+		repository.delete((Pedido) buscaPedido(id));
 	}
-	
+
 	private Pedido setaValoresAtualizacaoPedido(Pedido pedido, Pedido pedidoBanco) {
 
 		pedidoBanco.setDataAtualizacao(new Date());
-		
-		if (pedido.getPagamento() !=  null)
+
+		if (pedido.getPagamento() != null)
 			pedidoBanco.setPagamento(pedido.getPagamento());
-		
-		if (pedido.getCliente() != null) 
+
+		if (pedido.getCliente() != null)
 			pedidoBanco.setCliente(pedido.getCliente());
-		
-		if (pedido.getItens() !=  null)
+
+		if (pedido.getItens() != null)
 			pedidoBanco.setItens(pedido.getItens());
-		
+
 		return pedidoBanco;
-		}
+	}
 }
