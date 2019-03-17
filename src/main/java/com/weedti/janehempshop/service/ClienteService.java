@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.weedti.janehempshop.model.Cliente;
-import com.weedti.janehempshop.model.exception.ServerSideException;
+import com.weedti.janehempshop.model.exception.ObjectNotFoundException;
 import com.weedti.janehempshop.repository.ClienteRepository;
 
 @Service
@@ -33,7 +33,7 @@ public class ClienteService {
 
 	public Cliente buscaCliente(Integer idCliente) {
 		return repository.findById(idCliente)
-				.orElseThrow(() -> new ServerSideException("Erro ao buscar cliente no banco"));
+				.orElseThrow(() -> new ObjectNotFoundException("Erro ao buscar cliente no banco"));
 
 	}
 

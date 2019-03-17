@@ -40,6 +40,7 @@ public class Pedido implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataPedido;
 
+	@Null
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataAtualizacao;
 
@@ -50,7 +51,7 @@ public class Pedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Cliente cliente;
-	
+
 	@NotNull(message = "itens do pedido e obrigatorio")
 	@OneToMany(mappedBy = "id.pedido")
 	private Set<ItemPedido> itens = new HashSet<>();
