@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.weedti.janehempshop.model.Cor;
 import com.weedti.janehempshop.model.exception.ObjectNotFoundException;
 import com.weedti.janehempshop.model.exception.ServerSideException;
-import com.weedti.janehempshop.model.response.ServiceResponse;
 import com.weedti.janehempshop.repository.CorRepository;
 
 @Service
@@ -19,46 +18,42 @@ public class CorService {
 	private CorRepository repository;
 
 	public List<Cor> buscaTodas() {
+		return Optional.of(repository.findAll())
+				.orElseThrow(() -> new ObjectNotFoundException("Nenhuma cor encontrada"));
 
-		return repository.findAll();
 	}
 
-	public ServiceResponse cadastraCor(Cor cor) {
+	public Cor cadastraCor(Cor cor) {
+
+		return Optional.of(repository.save(cor)).orElseThrow(() -> new ServerSideException("Erro ao cadastrar cor"));
+
+	}
+
+	public void deletaCor(Integer idCor) {
 
 		try {
-			cor = repository.save(cor);
-
-			return new ServiceResponse(cor.getId(), "Inserido com sucesso");
+			repository.delete(buscaCor(idCor));
 
 		} catch (Exception e) {
-			throw new ServerSideException("Erro ao salvar insercao");
+			throw new ServerSideException("Erro ao deletar cor com o id " + idCor);
+
 		}
 
 	}
-	
-	public void deletaCor(Integer idCor) {
-		repository.delete(buscaCor(idCor));
-	}
 
 	public void atualizaCor(Integer idCor, Cor cor) {
-		repository.save(setaValoresAtualizacaoCor(cor, buscaCor(idCor)));
+		buscaCor(idCor);
+
+		Optional.of(repository.save(cor))
+				.orElseThrow(() -> new ServerSideException("Erro ao atualizar cor com o id " + idCor));
 
 	}
 
 	public Cor buscaCor(Integer idCor) {
 
-		Optional<Cor> cor = repository.findById(idCor);
+		return Optional.of(repository.findById(idCor))
+				.orElseThrow(() -> new ObjectNotFoundException("Nenhuma cor encontrada com o id " + idCor)).get();
 
-		return cor.orElseThrow(() -> new ObjectNotFoundException("Cor nao encontrada"));
-
-	}
-
-	private Cor setaValoresAtualizacaoCor(Cor cor, Cor corBanco) {
-
-		if (cor.getDescricao() != null && !cor.getDescricao().isEmpty())
-			corBanco.setDescricao(cor.getDescricao());
-
-		return corBanco;
 	}
 
 }

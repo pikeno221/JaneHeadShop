@@ -41,8 +41,9 @@ public class ClienteService {
 	}
 
 	public void atualizaCliente(Integer idCliente, Cliente cliente) {
-
-		Optional.of(repository.save(buscaCliente(idCliente)))
+		buscaCliente(idCliente);
+		
+		Optional.of(repository.save(cliente))
 				.orElseThrow(() -> new ServerSideException("Erro ao atualizar Cliente"));
 
 	}

@@ -48,7 +48,9 @@ public class PedidoService {
 	}
 
 	public void atualizaPedido(Integer id, Pedido pedido) {
-		Optional.of(repository.save((Pedido) buscaPedido(id)))
+		buscaPedido(id);
+
+		Optional.of(repository.save((pedido)))
 				.orElseThrow(() -> new ObjectNotFoundException("Pedido com o id " + id + " nao foi encontrado. "));
 
 	}

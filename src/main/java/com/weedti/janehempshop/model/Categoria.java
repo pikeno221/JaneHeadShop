@@ -31,6 +31,10 @@ public class Categoria  implements Serializable {
 	@NotNull(message = "descricao e obrigatorio")
 	private String descricao;
 	
+	private String campo1;
+	
+	private String campo2;
+	
 	
 	
 

@@ -47,7 +47,8 @@ public class ProdutoService {
 	}
 
 	public void atualizaProduto(Integer idProduto, Produto produto) {
-
+		buscaProduto(idProduto);
+		
 		// SALVA O OBJ COM OS OUTROS CAMPOS NULOS OU ELES MANTEM?
 		Optional.of(repository.save(produto))
 				.orElseThrow(() -> new ServerSideException("Erro ao atualizar produto "));
